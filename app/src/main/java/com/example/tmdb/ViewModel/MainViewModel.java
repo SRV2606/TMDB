@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.tmdb.MovieRepository;
 import com.example.tmdb.model.Movie;
+import com.example.tmdb.model.Repository.MovieRepository;
 
 import java.util.List;
 

@@ -1,9 +1,10 @@
-package com.example.tmdb;
+package com.example.tmdb.Helpers;
 
 import android.app.Application;
 
 import com.example.tmdb.ViewModel.MainViewModelFactory;
 import com.example.tmdb.db.MovieDatabase;
+import com.example.tmdb.model.Repository.MovieRepository;
 
 public class Injector {
 

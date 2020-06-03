@@ -1,4 +1,4 @@
-package com.example.tmdb.Adapters;
+package com.example.tmdb.View.Adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;

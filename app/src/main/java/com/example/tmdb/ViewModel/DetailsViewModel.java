@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.tmdb.MovieRepository;
 import com.example.tmdb.model.Movie;
+import com.example.tmdb.model.Repository.MovieRepository;
 import com.example.tmdb.model.Reviews;
 import com.example.tmdb.model.Trailers;
 

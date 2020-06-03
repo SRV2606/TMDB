@@ -1,4 +1,4 @@
-package com.example.tmdb;
+package com.example.tmdb.model.Repository;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.tmdb.Network.RemoteNetworkCall;
 import com.example.tmdb.db.MovieDatabase;
 import com.example.tmdb.db.dao.IFavouriteMovieDao;
 import com.example.tmdb.model.Movie;
+import com.example.tmdb.model.Network.RemoteNetworkCall;
 import com.example.tmdb.model.Reviews;
 import com.example.tmdb.model.Trailers;
 

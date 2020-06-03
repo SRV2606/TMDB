@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tmdb.MovieRepository;
+import com.example.tmdb.model.Repository.MovieRepository;
 
 public final class MainViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private final MovieRepository mRepository;

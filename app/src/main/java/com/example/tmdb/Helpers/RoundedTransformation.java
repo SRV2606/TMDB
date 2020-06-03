@@ -1,4 +1,4 @@
-package com.example.tmdb;
+package com.example.tmdb.Helpers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

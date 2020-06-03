@@ -1,4 +1,4 @@
-package com.example.tmdb.Adapters;
+package com.example.tmdb.View.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tmdb.Helpers.RoundedTransformation;
 import com.example.tmdb.R;
-import com.example.tmdb.RoundedTransformation;
 import com.example.tmdb.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.tmdb.Network.Constants.POSTER_BASE_URL;
+import static com.example.tmdb.model.Network.Constants.POSTER_BASE_URL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 

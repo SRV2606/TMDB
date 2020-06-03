@@ -1,4 +1,4 @@
-package com.example.tmdb;
+package com.example.tmdb.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tmdb.Adapters.MovieAdapter;
-import com.example.tmdb.Adapters.MovieAdapter.ListItemClickListener;
+import com.example.tmdb.Helpers.Injector;
+import com.example.tmdb.R;
+import com.example.tmdb.View.Adapters.MovieAdapter;
 import com.example.tmdb.ViewModel.MainViewModel;
 import com.example.tmdb.ViewModel.MainViewModelFactory;
 import com.example.tmdb.model.Movie;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView(List<Movie> results) {
         if (results != null) {
-            MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results, new ListItemClickListener() {
+            MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results, new MovieAdapter.ListItemClickListener() {
                 @Override
                 public void onListItemClick(Movie movie) {
                     Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);

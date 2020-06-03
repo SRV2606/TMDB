@@ -1,4 +1,4 @@
-package com.example.tmdb.Network;
+package com.example.tmdb.model.Network;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

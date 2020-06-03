@@ -1,14 +1,15 @@
-package com.example.tmdb.Adapters;
+package com.example.tmdb.View.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tmdb.Helpers.RoundedTransformation;
 import com.example.tmdb.R;
-import com.example.tmdb.RoundedTransformation;
 import com.example.tmdb.model.Trailers;
 import com.squareup.picasso.Picasso;
 
@@ -20,8 +21,10 @@ import butterknife.ButterKnife;
 public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapter.MyViewHolder> {
 
 
+
     private List<Trailers> mMovieTrailerList;
     private ListItemClickListener mListItemClickListener;
+    private Context context;
 
     //Interface
 
@@ -44,6 +47,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.bind(mMovieTrailerList.get(position));
 
+
     }
 
     @Override
@@ -57,9 +61,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         @BindView(R.id.img_View_trailer)
-        ImageView imgViewTrailer;
+        AppCompatImageView imgViewTrailer;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -77,10 +80,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
         public void bind(Trailers trailers) {
 
-            Picasso.get()
-                    .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
-                    .transform(new RoundedTransformation(14, 0))
-                    .into(imgViewTrailer);
+            Picasso.get().load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg").transform(new RoundedTransformation(14, 0)).into(imgViewTrailer);
+
 
         }
     }

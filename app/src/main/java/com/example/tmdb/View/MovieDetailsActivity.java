@@ -1,4 +1,4 @@
-package com.example.tmdb;
+package com.example.tmdb.View;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,12 +20,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tmdb.Adapters.MovieReviewAdapter;
-import com.example.tmdb.Adapters.MovieTrailerAdapter;
-import com.example.tmdb.Network.Constants;
+import com.example.tmdb.Helpers.RoundedTransformation;
+import com.example.tmdb.R;
+import com.example.tmdb.View.Adapters.MovieReviewAdapter;
+import com.example.tmdb.View.Adapters.MovieTrailerAdapter;
 import com.example.tmdb.ViewModel.DetailViewModelFactory;
 import com.example.tmdb.ViewModel.DetailsViewModel;
 import com.example.tmdb.model.Movie;
+import com.example.tmdb.model.Network.Constants;
 import com.example.tmdb.model.Reviews;
 import com.example.tmdb.model.Trailers;
 import com.google.android.material.appbar.AppBarLayout;

@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".MovieDetailsActivity"></activity>
+        <activity android:name=".View.MovieDetailsActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>

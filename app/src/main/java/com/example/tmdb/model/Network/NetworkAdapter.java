@@ -1,4 +1,4 @@
-package com.example.tmdb.Network;
+package com.example.tmdb.model.Network;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.tmdb.Network.Constants.TMDB_BASE_URL;
+import static com.example.tmdb.model.Network.Constants.TMDB_BASE_URL;
 
 public class NetworkAdapter {
 

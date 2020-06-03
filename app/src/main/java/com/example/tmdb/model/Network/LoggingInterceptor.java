@@ -1,4 +1,4 @@
-package com.example.tmdb.Network;
+package com.example.tmdb.model.Network;
 
 import android.util.Log;
 

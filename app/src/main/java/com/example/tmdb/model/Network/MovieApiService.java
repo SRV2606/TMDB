@@ -1,4 +1,4 @@
-package com.example.tmdb.Network;
+package com.example.tmdb.model.Network;
 
 import com.example.tmdb.model.Movie;
 import com.example.tmdb.model.responses.MovieListResponse;
