@@ -14,13 +14,13 @@ public class MovieTrailerResponse {
 
     @SerializedName("results")
     @Expose
-    private List<Trailers> moviesResult;
+    private List<Trailers> moviesTrailers;
 
     public int getId() {
         return id;
     }
 
     public List<Trailers> getTrailers() {
-        return moviesResult;
+        return moviesTrailers;
     }
 }

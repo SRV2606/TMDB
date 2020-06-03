@@ -1,17 +1,22 @@
 package com.example.tmdb;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tmdb.Adapters.MovieAdapter;
+import com.example.tmdb.Adapters.MovieAdapter.ListItemClickListener;
 import com.example.tmdb.ViewModel.MainViewModel;
 import com.example.tmdb.ViewModel.MainViewModelFactory;
 import com.example.tmdb.model.Movie;
@@ -25,14 +30,13 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ANIMAL_IMAGE_TRANSITION_NAME = "animal_image_transition_name";
     private static final String MENU_SELECTED = "selected";
 
 
     MainViewModel viewModel;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.txt_lifeScript)
-    TextView txtLifeScript;
     @BindView(R.id.collapsing_main)
     CollapsingToolbarLayout collapsingMain;
     @BindView(R.id.appbar)
@@ -42,20 +46,23 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView movieRecycler;
     private int selected = 0;
+    private long max;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         MainViewModelFactory vMainViewModelFactory = Injector.provideMainViewModelFactory(getApplication());
         viewModel = ViewModelProviders.of(this, vMainViewModelFactory).get(MainViewModel.class);
         ButterKnife.bind(this);
-
-
+        setSupportActionBar(toolbar);
+        collapsingMain.setTitle("BLOCKBUSTER MOVIES");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         movieRecycler.setLayoutManager(gridLayoutManager);
-
+        movieRecycler.setItemAnimator(new DefaultItemAnimator());
+        movieRecycler.setNestedScrollingEnabled(true);
 
         if (savedInstanceState == null) {
             populateUI(selected);
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateUI(int i) {
 
 
-        // viewModel.mLiveDataFav().removeObservers(this);
+        viewModel.mLiveData().removeObservers(this);
 
 
         if (i == 0) {
@@ -86,13 +93,32 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+        if (i == 1) {
+
+            viewModel.mLiveDataFav().observe(this, new Observer<List<Movie>>() {
+                @Override
+                public void onChanged(List<Movie> movies) {
+                    setupRecyclerView(movies);
+                }
+            });
+        }
 
     }
 
+
     private void setupRecyclerView(List<Movie> results) {
         if (results != null) {
-            MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results);
+            MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results, new ListItemClickListener() {
+                @Override
+                public void onListItemClick(Movie movie) {
+                    Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);
+                    intent.putExtra("data", movie);
+                    startActivity(intent);
+                }
+            });
             movieRecycler.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
         }
     }
 
@@ -102,4 +128,46 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.highest_Rated:
+
+                viewModel.getTopRated();
+                selected = 0;
+                populateUI(selected);
+
+                break;
+
+            case R.id.most_popular:
+
+                viewModel.getPopular();
+                selected = 0;
+                populateUI(selected);
+                break;
+
+            case R.id.fav:
+
+
+                viewModel.getFavData();
+                selected = 1;
+                populateUI(selected);
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }
+

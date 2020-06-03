@@ -25,13 +25,21 @@ import static com.example.tmdb.Network.Constants.POSTER_BASE_URL;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
 
+    final private ListItemClickListener listItemClickListener;
     private final List<Movie> mMovieList;
     private final Context mContext;
 
 
-    public MovieAdapter(Context context, List<Movie> movieList) {
-        mMovieList = movieList;
-        mContext = context;
+    public MovieAdapter(Context context, List<Movie> movieList, ListItemClickListener mOnClickListener) {
+        this.listItemClickListener = mOnClickListener;
+        this.mMovieList = movieList;
+        this.mContext = context;
+    }
+
+
+    public interface ListItemClickListener {
+
+        void onListItemClick(Movie movie);
     }
 
     @NonNull
@@ -55,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         return mMovieList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.imageView)
         ImageView imageView;
@@ -68,6 +76,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Movie movie) {
@@ -79,6 +88,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             movieNameTV.setText(movie.getTitle());
             String rating = " " + movie.getVoteAverage() + " ";
             movieRatingTV.setText(rating);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            Movie movieSelected = mMovieList.get(adapterPosition);
+            listItemClickListener.onListItemClick(movieSelected);
+
+
         }
     }
 }

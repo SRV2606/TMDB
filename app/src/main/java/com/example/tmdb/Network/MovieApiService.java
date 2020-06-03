@@ -66,4 +66,13 @@ public interface MovieApiService {
 
     @GET("movie/{filter}")
     Observable<MovieListResponse> getMovies(@Path("filter") String filter, @Query("api_key") String apiKey);
+
+    @GET("movie/{id}/reviews")
+    Observable<MovieReviewResponse> getMovieReviews(@Path("id") int id, @Query("api_key") String apiKey);
+
+    // query for movie trailers
+
+    @GET("movie/{id}/videos")
+    Observable<MovieTrailerResponse> getMovieTrailers(@Path("id") int id, @Query("api_key") String apiKey);
+
 }
