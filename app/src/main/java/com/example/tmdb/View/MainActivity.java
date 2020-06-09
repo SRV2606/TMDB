@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this, vMainViewModelFactory).get(MainViewModel.class);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        collapsingMain.setTitle("BLOCKBUSTER MOVIES");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         movieRecycler.setLayoutManager(gridLayoutManager);
         movieRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
     private void populateUI(int i) {
 
 
-        viewModel.mLiveData().removeObservers(this);
 
 
         if (i == 0) {
@@ -108,6 +107,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupRecyclerView(List<Movie> results) {
+
+        viewModel.getProgressBar().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    progressBar.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
         if (results != null) {
             MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results, new MovieAdapter.ListItemClickListener() {
                 @Override
@@ -115,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);
                     intent.putExtra("data", movie);
                     startActivity(intent);
+                    postponeEnterTransition();
                 }
             });
             movieRecycler.setAdapter(adapter);

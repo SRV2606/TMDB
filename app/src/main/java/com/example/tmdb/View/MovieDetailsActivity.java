@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tmdb.Helpers.Constants;
 import com.example.tmdb.Helpers.RoundedTransformation;
 import com.example.tmdb.R;
 import com.example.tmdb.View.Adapters.MovieReviewAdapter;
@@ -27,7 +28,6 @@ import com.example.tmdb.View.Adapters.MovieTrailerAdapter;
 import com.example.tmdb.ViewModel.DetailViewModelFactory;
 import com.example.tmdb.ViewModel.DetailsViewModel;
 import com.example.tmdb.model.Movie;
-import com.example.tmdb.model.Network.Constants;
 import com.example.tmdb.model.Reviews;
 import com.example.tmdb.model.Trailers;
 import com.google.android.material.appbar.AppBarLayout;
@@ -117,7 +117,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         recyclerReview.setItemAnimator(new DefaultItemAnimator());
 
 
-        Movie movie = getIntent().getParcelableExtra("data");
+        final Movie movie = getIntent().getParcelableExtra("data");
         mResult = movie;
         String name = getIntent().getExtras().getString(MainActivity.EXTRA_ANIMAL_IMAGE_TRANSITION_NAME);
         Float rating = Float.valueOf(movie.getVoteCount());

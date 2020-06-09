@@ -1,7 +1,5 @@
 package com.example.tmdb.ViewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,23 +15,25 @@ public class MainViewModel extends ViewModel {
     private MovieRepository mMovieRepository;
     private LiveData<List<Movie>> mData;
     private LiveData<List<Movie>> mDataFav;
+    private LiveData<Boolean> mBar;
 
 
     public MainViewModel(MovieRepository repository) {
         mMovieRepository = repository;
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        Log.d("xxx", "data cleared");
-    }
 
     public LiveData<List<Movie>> mLiveData() {
         mData = mMovieRepository.mLiveData();
         return mData;
     }
 
+    public LiveData<Boolean> getProgressBar() {
+        mBar = mMovieRepository.getProgressBar();
+        return mBar;
+    }
+
+    //Network call
     public LiveData<List<Movie>> mLiveDataFav() {
         if (mDataFav == null) {
             mDataFav = new MutableLiveData<>();

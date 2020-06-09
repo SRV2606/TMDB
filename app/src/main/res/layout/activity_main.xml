@@ -22,9 +22,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#0073e6"
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                app:title="@string/app_name"
-                app:titleTextColor="#FFFFFF" />
+                android:layout_width="match_parent" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,9 +41,10 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </FrameLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -53,5 +52,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
+
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

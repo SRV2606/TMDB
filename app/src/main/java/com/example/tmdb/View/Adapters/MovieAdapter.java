@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.tmdb.model.Network.Constants.POSTER_BASE_URL;
+import static com.example.tmdb.Helpers.Constants.POSTER_BASE_URL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 

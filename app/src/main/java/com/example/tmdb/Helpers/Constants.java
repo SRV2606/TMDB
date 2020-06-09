@@ -1,4 +1,4 @@
-package com.example.tmdb.model.Network;
+package com.example.tmdb.Helpers;
 
 public class Constants {
     public static final String TMDB_BASE_URL = "https://api.themoviedb.org/3/";

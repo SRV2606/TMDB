@@ -1,5 +1,7 @@
 package com.example.tmdb.model.Network;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -24,14 +26,15 @@ public class RemoteNetworkCall {
     private static MutableLiveData<List<Movie>> data = new MutableLiveData<>();
     private static MutableLiveData<List<Reviews>> dataReviews = new MutableLiveData<>();
     private static MutableLiveData<List<Trailers>> dataTrailer = new MutableLiveData<>();
-
+    private static final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     private static Observable<MovieListResponse> movieListResponseObservable;
     private static Observable<MovieReviewResponse> movieReviewResponseObservable;
     private static Observable<MovieTrailerResponse> movieTrailerResponseObservable;
     private static CompositeDisposable com = new CompositeDisposable();
+    private Context mContext;
 
-
+    //fetch moviews
     public static void fetchData(String sort) {
         MovieApiService apiService = NetworkAdapter.getRetrofitInstance().create(MovieApiService.class);
 
@@ -43,8 +46,10 @@ public class RemoteNetworkCall {
 
                                    @Override
                                    public void onNext(MovieListResponse movieListResponse) {
+
                                        List<Movie> results = movieListResponse.getResults();
                                        data.postValue(results);
+
 
                                    }
 
@@ -55,14 +60,15 @@ public class RemoteNetworkCall {
 
                                    @Override
                                    public void onComplete() {
-
+                                       isLoading.postValue(true);
                                    }
                                }
-                ));
+                )
+        );
 
     }
 
-
+    //fetch movie review
     public static void fetchMovieReview(int movieID) {
         MovieApiService apiService = NetworkAdapter.getRetrofitInstance().create(MovieApiService.class);
         movieReviewResponseObservable = apiService.getMovieReviews(movieID, BuildConfig.API_KEY);
@@ -89,6 +95,7 @@ public class RemoteNetworkCall {
 
     }
 
+    //fetch movie trailer
     public static void fetchMovieTrailer(int movieID) {
         MovieApiService apiService = NetworkAdapter.getRetrofitInstance().create(MovieApiService.class);
 
@@ -115,6 +122,7 @@ public class RemoteNetworkCall {
                 }));
 
     }
+
     public static LiveData<List<Movie>> getIntData() {
         return data;
     }
@@ -126,4 +134,12 @@ public class RemoteNetworkCall {
     public static LiveData<List<Trailers>> getTrailerData() {
         return dataTrailer;
     }
+
+    public static LiveData<Boolean> getProgressBar() {
+        return isLoading;
+    }
+
 }
+
+
+

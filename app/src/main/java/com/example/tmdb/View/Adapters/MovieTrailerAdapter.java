@@ -4,11 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tmdb.Helpers.RoundedTransformation;
 import com.example.tmdb.R;
 import com.example.tmdb.model.Trailers;
 import com.squareup.picasso.Picasso;
@@ -45,8 +44,13 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.bind(mMovieTrailerList.get(position));
+//       holder.bind(mMovieTrailerList.get(position));
 
+        Trailers trailers = mMovieTrailerList.get(position);
+
+        Picasso.get()
+                .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
+                .into(holder.imgViewTrailer);
 
     }
 
@@ -62,7 +66,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.img_View_trailer)
-        AppCompatImageView imgViewTrailer;
+        ImageView imgViewTrailer;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -80,7 +84,9 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
         public void bind(Trailers trailers) {
 
-            Picasso.get().load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg").transform(new RoundedTransformation(14, 0)).into(imgViewTrailer);
+            Picasso.get()
+                    .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
+                    .into(imgViewTrailer);
 
 
         }

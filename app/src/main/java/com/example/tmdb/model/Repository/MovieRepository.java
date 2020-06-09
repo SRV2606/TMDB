@@ -25,6 +25,7 @@ public class MovieRepository {
     private LiveData<List<Movie>> mDataFav;
     private LiveData<List<Reviews>> mReviewResult;
     private LiveData<List<Trailers>> mTrailerResult;
+    private LiveData<Boolean> mBar;
 
     //constructor for movie
     public MovieRepository(Application application) {
@@ -75,6 +76,11 @@ public class MovieRepository {
         mData = RemoteNetworkCall.getIntData();
 
         return mData;
+    }
+
+    public LiveData<Boolean> getProgressBar() {
+        mBar = RemoteNetworkCall.getProgressBar();
+        return mBar;
     }
 
     public void getFavData() {
