@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tmdb.Helpers.Constants;
+import com.example.tmdb.Helpers.Injector;
 import com.example.tmdb.Helpers.RoundedTransformation;
 import com.example.tmdb.R;
 import com.example.tmdb.View.Adapters.MovieReviewAdapter;
@@ -96,7 +97,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         ButterKnife.bind(this);
         fabDetail.setOnClickListener(this);
         fabDetail.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        postponeEnterTransition();
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -119,10 +120,10 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
 
         final Movie movie = getIntent().getParcelableExtra("data");
         mResult = movie;
-        String name = getIntent().getExtras().getString(MainActivity.EXTRA_ANIMAL_IMAGE_TRANSITION_NAME);
+//        String name = getIntent().getExtras().getString(MainActivity.EXTRA_ANIMAL_IMAGE_TRANSITION_NAME);
         Float rating = Float.valueOf(movie.getVoteCount());
         collapsingtoolbar.setTitle(mResult.getOriginalTitle());
-        DetailViewModelFactory factory = new DetailViewModelFactory(mResult.getId(), getApplicationContext());
+        DetailViewModelFactory factory = Injector.provideDetailViewModelFactory(getApplication(), mResult.getId(), getApplicationContext());
 
 
         mDetailViewModel = ViewModelProviders.of(this, factory).get(DetailsViewModel.class);
@@ -130,7 +131,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
 
         ratingbar.setRating(cal);
 
-        imagePoster.setTransitionName(name);
+//        imagePoster.setTransitionName(name);
         Picasso.get().load(Constants.BACKDROP_BASE_URL + movie.getBackdropPath()).into(appBarImage);
         Picasso.get().load(Constants.POSTER_BASE_URL + mResult.getPosterPath()).transform(new RoundedTransformation(20, 0)).into(imagePoster, new Callback() {
             @Override

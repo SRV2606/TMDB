@@ -87,6 +87,7 @@
 
             <ImageView
                 android:id="@+id/image_poster"
+                android:transitionName="imageMain"
                 android:layout_width="140dp"
                 android:layout_height="190dp"
 

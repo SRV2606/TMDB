@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -121,11 +123,12 @@ public class MainActivity extends AppCompatActivity {
         if (results != null) {
             MovieAdapter adapter = new MovieAdapter(getApplicationContext(), results, new MovieAdapter.ListItemClickListener() {
                 @Override
-                public void onListItemClick(Movie movie) {
+                public void onListItemClick(Movie movie, ImageView view) {
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, view, "imageMain");
                     Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);
                     intent.putExtra("data", movie);
-                    startActivity(intent);
-                    postponeEnterTransition();
+                    startActivity(intent, options.toBundle());
                 }
             });
             movieRecycler.setAdapter(adapter);

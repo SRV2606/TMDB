@@ -39,7 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     public interface ListItemClickListener {
 
-        void onListItemClick(Movie movie);
+        void onListItemClick(Movie movie, ImageView view);
     }
 
     @NonNull
@@ -94,7 +94,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             Movie movieSelected = mMovieList.get(adapterPosition);
-            listItemClickListener.onListItemClick(movieSelected);
+            listItemClickListener.onListItemClick(movieSelected, imageView);
 
 
         }
