@@ -50,6 +50,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
         Picasso.get()
                 .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
+                .error(R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.imageViewTrailer);
 
     }
