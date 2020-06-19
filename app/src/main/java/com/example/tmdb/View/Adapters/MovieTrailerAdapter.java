@@ -50,7 +50,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
         Picasso.get()
                 .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
-                .into(holder.imgViewTrailer);
+                .into(holder.imageViewTrailer);
 
     }
 
@@ -65,8 +65,9 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.img_View_trailer)
-        ImageView imgViewTrailer;
+
+        @BindView(R.id.image_view_trailer)
+        ImageView imageViewTrailer;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -86,7 +87,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
             Picasso.get()
                     .load("http://img.youtube.com/vi/" + trailers.getKey() + "/0.jpg")
-                    .into(imgViewTrailer);
+                    .into(imageViewTrailer);
 
 
         }

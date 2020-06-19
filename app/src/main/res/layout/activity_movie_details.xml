@@ -90,8 +90,6 @@
                 android:transitionName="imageMain"
                 android:layout_width="140dp"
                 android:layout_height="190dp"
-
-
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:src="@mipmap/ic_launcher"
